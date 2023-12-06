@@ -32,10 +32,4 @@ public abstract class ContainerEnvelope implements Container {
   public ContainerEnvelope(final GenericContainer<?> cntr) {
     this.container = cntr;
   }
-
-  @Override
-  public final GenericContainer<?> run() {
-    this.container.start();
-    return this.container;
-  }
 }

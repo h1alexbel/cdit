@@ -14,5 +14,9 @@ public interface Container {
    *
    * @return GenericContainer
    */
-  GenericContainer<?> run();
+  Container run();
+
+  Container env(String k, String v);
+
+  GenericContainer<?> self();
 }
