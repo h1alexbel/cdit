@@ -46,7 +46,7 @@ dependencies {
 
 ## Running Containers
 
-To create Docker container, for instance [PostgreSQL](), you can use
+To create Docker container, for instance [PostgreSQL](https://hub.docker.com/_/postgres), you can use
 ```java
 import org.cdit.containers.Postgres;
 import org.cdit.containers.Env;
