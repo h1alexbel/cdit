@@ -10,7 +10,7 @@
 [![mvn](https://github.com/h1alexbel/cdit/actions/workflows/mvn.yml/badge.svg)](https://github.com/h1alexbel/cdit/actions/workflows/mvn.yml)
 [![maven central](http://maven-badges.herokuapp.com/maven-central/io.github.h1alexbel/cdit/badge.svg)](https://search.maven.org/artifact/io.github.h1alexbel/cdit)
 [![javadoc](https://javadoc.io/badge2/io.github.h1alexbel/cdit/javadoc.svg)](https://javadoc.io/doc/io.github.h1alexbel/cdit)
-[![codecov](https://codecov.io/gh/h1alexbel/cdit/branch/master/graph/badge.svg?token=4IFT0H3Y01)](https://codecov.io/gh/h1alexbel/cdit)
+[![codecov](https://codecov.io/gh/h1alexbel/cdit/graph/badge.svg?token=V2VWAvE2f7)](https://codecov.io/gh/h1alexbel/cdit)
 
 [![Hits-of-Code](https://hitsofcode.com/github/h1alexbel/cdit)](https://hitsofcode.com/view/github/h1alexbel/cdit)
 [![Lines-of-Code](https://tokei.rs/b1/github/h1alexbel/cdit)](https://github.com/h1alexbel/cdit)
