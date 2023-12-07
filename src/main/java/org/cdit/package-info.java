@@ -20,21 +20,9 @@
  * SOFTWARE.
  */
 
-package org.cdit;
-
-import org.testcontainers.containers.GenericContainer;
-
 /**
- * Docker Container.
+ * Common Docker Integration Tests.
  *
  * @since 0.0.0
  */
-public interface Container {
-
-  /**
-   * Start Container.
-   *
-   * @return GenericContainer
-   */
-  GenericContainer<?> run();
-}
+package org.cdit;

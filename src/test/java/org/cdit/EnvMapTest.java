@@ -22,19 +22,52 @@
 
 package org.cdit;
 
-import org.testcontainers.containers.GenericContainer;
+import org.cactoos.list.ListOf;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
- * Docker Container.
+ * Test suite for {@link EnvMap}
  *
  * @since 0.0.0
  */
-public interface Container {
+final class EnvMapTest {
 
-  /**
-   * Start Container.
-   *
-   * @return GenericContainer
-   */
-  GenericContainer<?> run();
+  @Test
+  void readsMap() {
+    final String first = "val1";
+    final String second = "val2";
+    final Map<String, String> boxed = new EnvMap(
+      new ListOf<>(
+        new Env("name1", first),
+        new Env("name2", second)
+      )
+    ).value();
+    MatcherAssert.assertThat(
+      "Boxed environment variables are not in the right format",
+      boxed.get("name1"),
+      new IsEqual<>(first)
+    );
+    MatcherAssert.assertThat(
+      "Boxed environment variables are not in the right format",
+      boxed.get("name2"),
+      new IsEqual<>(second)
+    );
+  }
+
+  @Test
+  void readsEmptyMap() {
+    MatcherAssert.assertThat(
+      "Map is not empty",
+      new EnvMap(new ListOf<>())
+        .value(),
+      new IsEqual<Map<String, String>>(
+        Collections.emptyMap()
+      )
+    );
+  }
 }

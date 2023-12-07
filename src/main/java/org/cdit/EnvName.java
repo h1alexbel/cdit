@@ -22,19 +22,38 @@
 
 package org.cdit;
 
-import org.testcontainers.containers.GenericContainer;
+import org.cactoos.Scalar;
 
 /**
- * Docker Container.
+ * Environment Variable's Name.
  *
  * @since 0.0.0
  */
-public interface Container {
+public final class EnvName implements Scalar<String> {
 
   /**
-   * Start Container.
-   *
-   * @return GenericContainer
+   * Environment Variable.
    */
-  GenericContainer<?> run();
+  private final Scalar<String> variable;
+
+  /**
+   * Ctor.
+   *
+   * @param env Environment Variable
+   */
+  public EnvName(final Scalar<String> env) {
+    this.variable = env;
+  }
+
+  @Override
+  public String value() {
+    try {
+      return this.variable.value().split(":")[0];
+    } catch (final Exception ex) {
+      throw new IllegalStateException(
+        "Can't parse env %s".formatted(this.variable),
+        ex
+      );
+    }
+  }
 }

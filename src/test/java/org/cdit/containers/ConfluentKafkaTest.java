@@ -20,21 +20,13 @@
  * SOFTWARE.
  */
 
-package org.cdit;
-
-import org.testcontainers.containers.GenericContainer;
+package org.cdit.containers;
 
 /**
- * Docker Container.
+ * Test suite for {@link ConfluentKafka}.
  *
  * @since 0.0.0
  */
-public interface Container {
+final class ConfluentKafkaTest {
 
-  /**
-   * Start Container.
-   *
-   * @return GenericContainer
-   */
-  GenericContainer<?> run();
 }

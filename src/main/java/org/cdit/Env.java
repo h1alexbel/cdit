@@ -22,19 +22,38 @@
 
 package org.cdit;
 
-import org.testcontainers.containers.GenericContainer;
+import org.cactoos.Scalar;
 
 /**
- * Docker Container.
+ * Environment Variable.
  *
  * @since 0.0.0
  */
-public interface Container {
+public final class Env implements Scalar<String> {
 
   /**
-   * Start Container.
-   *
-   * @return GenericContainer
+   * Name.
    */
-  GenericContainer<?> run();
+  private final String name;
+
+  /**
+   * Value.
+   */
+  private final String value;
+
+  /**
+   * Ctor.
+   *
+   * @param nm  Name
+   * @param val Value
+   */
+  public Env(final String nm, final String val) {
+    this.name = nm;
+    this.value = val;
+  }
+
+  @Override
+  public String value() {
+    return "%s:%s".formatted(this.name, this.value);
+  }
 }

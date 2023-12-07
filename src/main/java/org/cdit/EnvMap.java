@@ -22,19 +22,41 @@
 
 package org.cdit;
 
-import org.testcontainers.containers.GenericContainer;
+import org.cactoos.Scalar;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Docker Container.
+ * Environment Map.
  *
  * @since 0.0.0
  */
-public interface Container {
+public final class EnvMap implements Scalar<Map<String, String>> {
 
   /**
-   * Start Container.
-   *
-   * @return GenericContainer
+   * Variables.
    */
-  GenericContainer<?> run();
+  private final List<Env> vars;
+
+  /**
+   * Ctor.
+   *
+   * @param envs Variables
+   */
+  public EnvMap(final List<Env> envs) {
+    this.vars = envs;
+  }
+
+  @Override
+  public Map<String, String> value() {
+    final Map<String, String> boxed = new HashMap<>(13);
+    this.vars.forEach(env -> {
+      final String name = new EnvName(env).value();
+      final String value = new EnvVal(env).value();
+      boxed.put(name, value);
+    });
+    return boxed;
+  }
 }

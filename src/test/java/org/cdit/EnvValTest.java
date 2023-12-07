@@ -22,19 +22,24 @@
 
 package org.cdit;
 
-import org.testcontainers.containers.GenericContainer;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Test;
 
 /**
- * Docker Container.
+ * Test suite for {@link EnvVal}.
  *
  * @since 0.0.0
  */
-public interface Container {
+final class EnvValTest {
 
-  /**
-   * Start Container.
-   *
-   * @return GenericContainer
-   */
-  GenericContainer<?> run();
+  @Test
+  void readsValue() {
+    final String val = "VAL";
+    MatcherAssert.assertThat(
+      "ENV Value is not in the right format",
+      new EnvVal(new Env("NAME", val)).value(),
+      new IsEqual<>(val)
+    );
+  }
 }

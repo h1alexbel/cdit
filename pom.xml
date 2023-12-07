@@ -34,7 +34,7 @@ SOFTWARE.
   <version>1.0-SNAPSHOT</version>
   <name>cdit</name>
   <description>
-    A Collection of Pre-Configured Docker Containers for Your Integration Tests
+    CDIT: A Collection of Pre-Configured Docker Containers for your Integration Tests
   </description>
   <inceptionYear>2023</inceptionYear>
   <url>https://github.com/h1alexbel/cdit</url>
@@ -55,11 +55,11 @@ SOFTWARE.
   </developers>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/eo-cqrs/eo-kafka/issues</url>
+    <url>https://github.com/h1alexbel/cdit/issues</url>
   </issueManagement>
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/eo-cqrs/eo-kafka/actions</url>
+    <url>https://github.com/h1alexbel/cdit/actions</url>
   </ciManagement>
   <licenses>
     <license>
@@ -95,13 +95,19 @@ SOFTWARE.
     <mockito-core.version>5.5.0</mockito-core.version>
     <mockito-junit-jupiter.version>5.5.0</mockito-junit-jupiter.version>
     <postgresql.version>1.18.3</postgresql.version>
+    <cactoos.version>0.55.0</cactoos.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.testcontainers</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>${postgresql.version}</version>
+      <artifactId>testcontainers</artifactId>
+      <version>1.18.3</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.cactoos</groupId>
+      <artifactId>cactoos</artifactId>
+      <version>${cactoos.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -147,6 +153,14 @@ SOFTWARE.
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
@@ -155,34 +169,6 @@ SOFTWARE.
             <include>**/*Test.*</include>
           </includes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-verifier-plugin</artifactId>
-        <version>${maven-verifier-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>main</id>
-            <phase>package</phase>
-            <goals>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <verificationFile>src/verifier/verifications.xml</verificationFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <version>${maven-invoker-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>default</id>
-            <phase>none</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -245,6 +231,42 @@ SOFTWARE.
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <version>${maven-invoker-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>verify-style</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+              <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <executions>
           <execution>
@@ -255,14 +277,6 @@ SOFTWARE.
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>com.github.volodya-lombrozo</groupId>
@@ -290,25 +304,17 @@ SOFTWARE.
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven-checkstyle-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${checkstyle.version}</version>
-          </dependency>
-        </dependencies>
+        <artifactId>maven-verifier-plugin</artifactId>
+        <version>${maven-verifier-plugin.version}</version>
         <executions>
           <execution>
-            <id>verify-style</id>
-            <phase>process-classes</phase>
+            <id>main</id>
+            <phase>package</phase>
             <goals>
-              <goal>check</goal>
+              <goal>verify</goal>
             </goals>
             <configuration>
-              <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-              <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+              <verificationFile>src/verifier/verifications.xml</verificationFile>
             </configuration>
           </execution>
         </executions>
