@@ -20,9 +20,8 @@
  * SOFTWARE.
  */
 
-package org.cdit.containers;
-
 import org.cdit.Env;
+import org.cdit.containers.Postgres;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -34,7 +33,7 @@ import org.testcontainers.containers.GenericContainer;
  *
  * @since 0.0.0
  */
-final class PostgresTest {
+final class EntryTest {
 
   @Test
   void runs() {
