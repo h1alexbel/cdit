@@ -33,13 +33,14 @@ Maven:
 <dependency>
   <groupId>io.github.h1alexbel</groupId>
   <artifactId>cdit</artifactId>
+  <scope>test</scope>
 </dependency>
 ```
 
 Gradle:
 ```groovy
 dependencies {
-    compile 'io.github.h1alexbel:cdit:<version>'
+    testCompile 'io.github.h1alexbel:cdit:<version>'
 }
 ```
 
