@@ -43,8 +43,9 @@ dependencies {
 }
 ```
 
-## Containers
-To create Docker container, let's say PostgreSQL, you can use
+## Running Containers
+
+To create Docker container, for instance [PostgreSQL](), you can use
 ```java
 import org.cdit.containers.Postgres;
 import org.cdit.containers.Env;
@@ -57,7 +58,7 @@ new Postgres(
 ```
 Now Docker container is up and running.
 
-## Creating your own Container Class
+## Creating Custom Containers
 
 If you want to create your own container, you can extend [ContainerEnvelope](https://github.com/h1alexbel/cdit/blob/master/src/main/java/org/cdit/ContainerEnvelope.java)
 this way
@@ -75,6 +76,21 @@ public final class MyPrivateContainer extends ContainerEnvelope {
 now, you can run it
 ```java
 new MyPrivateContainer("0.0.1", new Env("test", "true")).run();
+```
+
+If you need more flexible configuration, it can be achieved by implementing [Container](https://github.com/h1alexbel/cdit/blob/master/src/main/java/org/cdit/Container.java)
+
+```java
+import org.cdit.Container;
+import org.testcontainers.containers.GenericContainer;
+
+public final class MyPrivateContainer implements Container {
+
+  @Override
+  public GenericContainer<?> run() {
+    // your code
+  }
+}
 ```
 
 ## How to Contribute
