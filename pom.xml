@@ -31,7 +31,7 @@ SOFTWARE.
   </parent>
   <groupId>io.github.h1alexbel</groupId>
   <artifactId>cdit</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>cdit</name>
   <description>
     CDIT: A Collection of Pre-Configured Docker Containers for your Integration Tests
