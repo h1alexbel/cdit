@@ -92,8 +92,8 @@ SOFTWARE.
     <maven-invoker-plugin.version>3.6.0</maven-invoker-plugin.version>
     <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
     <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-    <mockito-core.version>5.9.0</mockito-core.version>
-    <mockito-junit-jupiter.version>5.9.0</mockito-junit-jupiter.version>
+    <mockito-core.version>5.10.0</mockito-core.version>
+    <mockito-junit-jupiter.version>5.10.0</mockito-junit-jupiter.version>
     <postgresql.version>1.18.3</postgresql.version>
     <cactoos.version>0.55.0</cactoos.version>
   </properties>
